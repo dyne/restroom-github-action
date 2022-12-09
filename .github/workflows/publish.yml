@@ -15,7 +15,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: albertolerda/restroom-service
+  IMAGE_NAME: dyne/restroom-service
 
 jobs:
   build-and-push-image:
