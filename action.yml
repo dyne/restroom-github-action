@@ -1,0 +1,19 @@
+name: 'Simple http server with restroom mw in GitHub Actions'
+description: 'Start a restroom server'
+
+inputs:
+  restroom-container-name:
+    description: "Name of the created container. Useful if you run multiple Restroom containers"
+    required: false
+    default: 'restroom'
+
+  restroom-contracts:
+    description: "Absolute path to contracts"
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.restroom-container-name }}
+    - ${{ inputs.restroom-contracts }}
+volumes:
