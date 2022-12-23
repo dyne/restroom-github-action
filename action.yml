@@ -10,10 +10,15 @@ inputs:
   restroom-contracts:
     description: "Absolute path to contracts"
     required: true
+
+  restroom-files:
+    description: "Absolute path to files dir"
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.restroom-container-name }}
     - ${{ inputs.restroom-contracts }}
+    - ${{ inputs.restroom-files }}
 volumes:

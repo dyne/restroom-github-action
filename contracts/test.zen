@@ -1,2 +1,2 @@
-Given nothing
+Given I have a 'string dictionary' named 'http request'
 Then print the string 'it works'
