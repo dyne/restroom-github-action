@@ -1,17 +1,31 @@
+name: restroom-ci
 on: [push]
 
 jobs:
   restroom_job:
     runs-on: ubuntu-latest
-    name: Start restroom and request a simple contract
+    name: 🚀 Start restroom and request some contracts
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Start restroom
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v3
+      - name: 🚀 Start restroom
         uses: ./
         with:
           restroom-contracts: "${{ github.workspace }}/contracts"
-      - name: Install curl
-        run: sudo apt install curl
-      - name: Try to fetch
-        run: curl http://localhost:3000/api/test
+          restroom-files: "${{ github.workspace }}/"
+      - name: ⚙️ Execute a contract
+        run: |
+          curl -s -w "%{stderr}%{http_code}" http://localhost:3000/api/test 2>/tmp/status
+          if [[ `cat /tmp/status` != "200" ]]; then
+            echo -ne "\nerror: "
+            cat /tmp/status
+            exit 1
+          fi
+      - name: ⚙️ Execute a contract with files
+        run: |
+          curl -s -w "%{stderr}%{http_code}" http://localhost:3000/api/file_test 2>/tmp/status
+          if [[ `cat /tmp/status` != "200" ]]; then
+            echo -ne "\nerror: "
+            cat /tmp/status
+            exit 1
+          fi

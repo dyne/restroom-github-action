@@ -1,0 +1,6 @@
+Rule caller restroom-mw
+
+Given I read the content of 'data/data.json'
+Given I have a 'string' named 'result'
+
+Then print the 'result'
