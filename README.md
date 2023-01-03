@@ -14,13 +14,12 @@ jobs:
     name: Start restroom and request a simple contract
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       - name: Start restroom
-        uses: dyne/restroom-github-action
+        uses: dyne/restroom-github-action@v1
         with:
           restroom-contracts: "${{ github.workspace }}/contracts"
-      - name: Install curl
-        run: sudo apt install curl
+          restroom-files: "${{ github.workspace }}/"
       - name: Try to fetch
         run: curl http://localhost:3000/api/test
 ```
