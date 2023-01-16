@@ -1,0 +1,5 @@
+Rule unknown ignore
+Given I have a 'string' named 'path'
+When I write string 'HELLO WORLD!' in 'string to log'
+Then print the data
+Then I append the string 'string_to_log' to the logfile named by 'path'

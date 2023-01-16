@@ -13,6 +13,7 @@ jobs:
         with:
           restroom-contracts: "${{ github.workspace }}/contracts"
           restroom-files: "${{ github.workspace }}/"
+          restroom-logger: "${{ github.workspace }}/"
       - name: ⚙️ Execute a contract
         run: |
           curl -s -w "%{stderr}%{http_code}" http://localhost:3000/api/test 2>/tmp/status
@@ -26,6 +27,19 @@ jobs:
           curl -s -w "%{stderr}%{http_code}" http://localhost:3000/api/file_test 2>/tmp/status
           if [[ `cat /tmp/status` != "200" ]]; then
             echo -ne "\nerror: "
+            cat /tmp/status
+            exit 1
+          fi
+      - name: ⚙️ Execute a contract with logger
+        run: |
+          curl -s -w "%{stderr}%{http_code}" http://localhost:3000/api/logger_test 2>/tmp/status
+          res=`cat my.log`
+          if [[ "$res" == "" ]]; then
+            echo "Wrong content of log"
+            echo "$res"
+          fi
+          if [[ `cat /tmp/status` != "200" ]]; then
+            printf "\nerror: "
             cat /tmp/status
             exit 1
           fi

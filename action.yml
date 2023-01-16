@@ -13,7 +13,13 @@ inputs:
 
   restroom-files:
     description: "Absolute path to files dir"
-    required: true
+    required: false
+    default: ""
+
+  restroom-logger:
+    description: "Absolute path to logger dir"
+    required: false
+    default: ""
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -21,4 +27,5 @@ runs:
     - ${{ inputs.restroom-container-name }}
     - ${{ inputs.restroom-contracts }}
     - ${{ inputs.restroom-files }}
+    - ${{ inputs.restroom-logger }}
 volumes:
