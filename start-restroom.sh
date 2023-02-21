@@ -20,5 +20,5 @@ if [[ "$FILES" != "" ]]; then
   FILES_PARAMS="-e FILES_DIR -v $FILES:$FILES_DIR"
 fi
 
-docker run --name $RESTROOM_CONTAINER_NAME --publish 3000:3000 $FILES_PARAMS $LOGGER_PARAMS -v "$CONTRACTS":"/app/contracts" --detach ghcr.io/dyne/restroom-mw:master
+docker run --name $RESTROOM_CONTAINER_NAME --publish 3000:3000 $FILES_PARAMS $LOGGER_PARAMS -v "$CONTRACTS":"/app/contracts" --detach ghcr.io/dyne/restroom-mw:latest
 sleep 7
