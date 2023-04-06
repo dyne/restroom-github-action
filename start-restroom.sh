@@ -23,6 +23,6 @@ fi
 docker run --name $RESTROOM_CONTAINER_NAME --publish 3000:3000 $FILES_PARAMS $LOGGER_PARAMS -v "$CONTRACTS":"/app/contracts" --detach ghcr.io/dyne/restroom-mw:latest
 
 # upgrade zenroom to latest version
-docker exec restroom yarn upgrade zenroom@latest
+docker exec $RESTROOM_CONTAINER_NAME yarn upgrade zenroom@latest
 
 sleep 7
