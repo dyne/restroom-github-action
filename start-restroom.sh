@@ -20,7 +20,7 @@ if [[ "$FILES" != "" ]]; then
   FILES_PARAMS="-e FILES_DIR -v $FILES:$FILES_DIR"
 fi
 
-docker run --name $RESTROOM_CONTAINER_NAME --publish 3000:3000 $FILES_PARAMS $LOGGER_PARAMS -v "$CONTRACTS":"/app/contracts" --detach ghcr.io/dyne/restroom-mw:latest
+docker run --network="host" --name $RESTROOM_CONTAINER_NAME --publish 3000:3000 $FILES_PARAMS $LOGGER_PARAMS -v "$CONTRACTS":"/app/contracts" --detach ghcr.io/dyne/restroom-mw:latest
 
 while ! `echo -e "\x1dclose\x0d" | telnet localhost 3000 >/dev/null 2>/dev/null`; do
   sleep 1
