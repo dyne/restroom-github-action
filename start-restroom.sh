@@ -21,4 +21,10 @@ if [[ "$FILES" != "" ]]; then
 fi
 
 docker run --name $RESTROOM_CONTAINER_NAME --publish 3000:3000 $FILES_PARAMS $LOGGER_PARAMS -v "$CONTRACTS":"/app/contracts" --detach ghcr.io/dyne/restroom-mw:latest
-sleep 7
+
+IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $RESTROOM_CONTAINER_NAME`
+
+while ! nc -z $IP 3000; do   
+  echo "$IP is not up"
+  sleep 1
+done
